@@ -1,12 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PumpkinGrower : MonoBehaviour
 {
     public Transform tree;
-    public Transform pumpkin;
+    public List<Transform> pumpkins;
 
-    
+    Coroutine startCoroutines, growTree, growPumpkin;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,10 +17,31 @@ public class PumpkinGrower : MonoBehaviour
 
     public void StartGrowing()
     {
-        StartCoroutine(Grow());
+        //Making sure to remove older Coroutines before starting new ones
+        if (startCoroutines != null)
+        {
+            StopCoroutine(startCoroutines);
+        }
+        if (growTree != null)
+        {
+            StopCoroutine(growTree);
+        }
+        if (growPumpkin != null)
+        {
+            StopCoroutine(growPumpkin);
+        }
+        StartCoroutine(GrowElements());
     }
 
-    IEnumerator Grow()
+    IEnumerator GrowElements()
+    {
+        //There is a stopAllCorutines function which stops all the Coroutines for the specific script
+        //Assigning the variable while initializing the Coroutine
+        yield return growTree = StartCoroutine(GrowTree());
+        yield return growPumpkin = StartCoroutine(GrowPumpkins());
+    }
+
+    IEnumerator GrowTree()
     {
         ResetElements();
         float time = 0;
@@ -31,22 +53,37 @@ public class PumpkinGrower : MonoBehaviour
 
             yield return null;
         }
+        
+    }
 
-        time = 0;
+    IEnumerator GrowPumpkins()
+    {
+        float time = 0;
+        resetPumpkins();
 
-        while (time < 1)
+        for (int i = 0; i < pumpkins.Count; i++)
         {
-            pumpkin.localScale = Vector2.one * time;
-            time += Time.deltaTime;
+            time = 0;
+            while (time < 1)
+            {
+                pumpkins[i].localScale = Vector2.one * time;
+                time += Time.deltaTime;
 
-            yield return null;
+                yield return null;
+            }
         }
-
     }
 
     void ResetElements()
     {
         tree.localScale = Vector2.zero;
-        pumpkin.localScale = Vector2.zero;
+        resetPumpkins();
+    }
+    void resetPumpkins()
+    {
+        for (int i = 0; i < pumpkins.Count; i++)
+        {
+            pumpkins[i].localScale = Vector2.zero;
+        }
     }
 }
