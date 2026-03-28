@@ -1,14 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PointerMovement : MonoBehaviour
 {
     public List<Transform> pointedObjects;
+    public UnityEvent onActionCalled;
 
     //pointerPositions holds the x coordinates that the player moves between when moving left and right
-    float[] pointerPositions = new float[3];
-    int currentPos = 0;
+    public float[] pointerPositions = new float[3];
+    public int currentPos = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -46,6 +48,15 @@ public class PointerMovement : MonoBehaviour
                     currentPos++;
             }
             transform.position = new Vector3(pointerPositions[currentPos], transform.position.y, transform.position.z);
+        }
+    }
+
+    public void callAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            //When the action button is pressed invoke the event
+            onActionCalled.Invoke();
         }
     }
 }

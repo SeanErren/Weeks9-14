@@ -422,7 +422,19 @@ MonoBehaviour:
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 601927033}
+        m_TargetAssemblyTypeName: PointerMovement, Assembly-CSharp
+        m_MethodName: callAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
@@ -498,6 +510,26 @@ MonoBehaviour:
   - {fileID: 779518543}
   - {fileID: 1094617361}
   - {fileID: 1426293779}
+  onActionCalled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 779518544}
+        m_TargetAssemblyTypeName: SprayColor, Assembly-CSharp
+        m_MethodName: testEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  pointerPositions:
+  - 0
+  - 0
+  - 0
+  currentPos: 0
 --- !u!1 &693348535
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779518543}
   - component: {fileID: 779518542}
+  - component: {fileID: 779518544}
   m_Layer: 0
   m_Name: Painters
   m_TagString: Untagged
@@ -726,6 +759,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779518544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779518541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96c13c7e054aecd47a70422c66cd31f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SprayColor
+  pointerScript: {fileID: 601927033}
 --- !u!1 &917437260
 GameObject:
   m_ObjectHideFlags: 0
