@@ -106,4 +106,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConstantMovement
   direction: 2
   speed: 3
-  angleSpeed: 5
+  angleSpeed: 50
