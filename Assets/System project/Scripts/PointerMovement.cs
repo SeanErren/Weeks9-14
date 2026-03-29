@@ -51,6 +51,7 @@ public class PointerMovement : MonoBehaviour
         }
     }
 
+    //Called on Unity evenet
     public void callAction(InputAction.CallbackContext context)
     {
         if (context.started)
