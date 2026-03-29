@@ -73,6 +73,20 @@ public class MugSpawner : MonoBehaviour
             yield return null;
         }
     }
+    //Called on Unity event
+    public void crushMug()
+    {
+        //Go through the mugs
+        for (int i = 0;i < mugs.Count;i++)
+        {
+            //If the mug is within the hitbox of the press crush it
+            if (crusherHitbox.bounds.Contains(mugs[i].transform.position))
+            {
+                mugs[i].transform.localScale -= new Vector3(0, 0.5f, 0);
+                mugs[i].transform.position -= new Vector3(0, 0.25f, 0);
+            }
+        }
+    }
 }
 
 public enum GameState
