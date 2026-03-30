@@ -13,9 +13,9 @@ public class MugSpawner : MonoBehaviour
     public SpriteRenderer crusherHitbox;
 
     List<GameObject> mugs = new();
-    float startingX = 10, distanceBetweenMugs = 8; //In meters (the distance is from the center of the mugs)
+    float startingX = 10, distanceBetweenMugs = 6; //In meters (the distance is from the center of the mugs)
     public GameState gameState = GameState.PRESTART;
-    public GameObject endGameCanvasElements;
+    public GameObject startGameCanvasElements, endGameCanvasElements;
     public UnityEvent endGame, startGame;
 
     //The main painter for its color
@@ -34,7 +34,7 @@ public class MugSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameState = GameState.PLAY;
+        
     }
 
     // Update is called once per frame
@@ -96,6 +96,10 @@ public class MugSpawner : MonoBehaviour
                                 endGameCanvasElements.SetActive(true);
                                 gameState = GameState.END;
                             }
+                            else
+                            {
+                                desiredColors.RemoveAt(0); //Remove the checked color
+                            }
 
                             Destroy(mugs[0]);
                             mugs.RemoveAt(0);
@@ -144,8 +148,11 @@ public class MugSpawner : MonoBehaviour
             }
         }
     }
+    //Also used to start off the game at the beginning
     public void Restart()
     {
+        //Remove start screen elements
+        startGameCanvasElements.SetActive(false);
         //Remove end screen elements
         endGameCanvasElements.SetActive(false);
         //Reset score
