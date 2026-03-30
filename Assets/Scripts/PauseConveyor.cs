@@ -10,6 +10,7 @@ public class PauseConveyor : MonoBehaviour
     float waitTime = 3; //Seconds
 
     bool hasStopped = false;
+    bool hasGameEnded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,16 +26,20 @@ public class PauseConveyor : MonoBehaviour
 
     public void stopConveyor()
     {
-        //If it hasn't stopped already and if the pointer is above the stop button
-        if (!hasStopped && transform.position.x == pointerScript.pointerPositions[pointerScript.currentPos])
+        //Only allow stopping if the game is still going
+        if (!hasGameEnded)
         {
-            InfiniteConveyor.isPaused = true; //Belts
-            ConstantMovement.isPaused = true; //Wheels
-            MugSpawner.isPaused = true; //Mugs
+            //If it hasn't stopped already and if the pointer is above the stop button
+            if (!hasStopped && transform.position.x == pointerScript.pointerPositions[pointerScript.currentPos])
+            {
+                InfiniteConveyor.isPaused = true; //Belts
+                ConstantMovement.isPaused = true; //Wheels
+                MugSpawner.isPaused = true; //Mugs
 
-            gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+                gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
 
-            StartCoroutine(Pause());
+                StartCoroutine(Pause());
+            }
         }
     }
 
@@ -56,5 +61,16 @@ public class PauseConveyor : MonoBehaviour
         InfiniteConveyor.isPaused = false; //Belts
         ConstantMovement.isPaused = false; //Wheels
         MugSpawner.isPaused = false; //Mugs
+    }
+
+    public void gameEnded()
+    {
+        hasGameEnded = true;
+    }
+
+    public void gameStarted()
+    {
+        hasStopped = false;
+        hasGameEnded = false;
     }
 }

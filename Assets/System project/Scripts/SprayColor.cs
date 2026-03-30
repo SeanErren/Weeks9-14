@@ -12,6 +12,8 @@ public class SprayColor : MonoBehaviour
 
     float cooldownTimer = 0, cooldown = 1.5f; //In seconds
 
+    bool hasGameEnded = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
