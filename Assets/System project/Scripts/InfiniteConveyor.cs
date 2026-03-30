@@ -8,6 +8,8 @@ public class InfiniteConveyor : MonoBehaviour
     GameObject copy1 = null;
     GameObject copy2 = null;
 
+    public static bool isPaused = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,23 +31,26 @@ public class InfiniteConveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMovingRight)
+        if (!isPaused)
         {
-            //If the out of screen conveyor reaches the center
-            if (copy2.transform.position.x > 0)
+            if (isMovingRight)
             {
-                Destroy(copy1);
-                copy1 = copy2;
-                copy2 = Instantiate(conveyor, new Vector3(-conveyor.transform.localScale.x, conveyor.transform.position.y, conveyor.transform.position.z), Quaternion.identity);
+                //If the out of screen conveyor reaches the center
+                if (copy2.transform.position.x > 0)
+                {
+                    Destroy(copy1);
+                    copy1 = copy2;
+                    copy2 = Instantiate(conveyor, new Vector3(-conveyor.transform.localScale.x, conveyor.transform.position.y, conveyor.transform.position.z), Quaternion.identity);
+                }
             }
-        }
-        else
-        {
-            if (copy2.transform.position.x < 0)
+            else
             {
-                Destroy(copy1);
-                copy1 = copy2;
-                copy2 = Instantiate(conveyor, new Vector3(conveyor.transform.localScale.x, conveyor.transform.position.y, conveyor.transform.position.z), Quaternion.identity);
+                if (copy2.transform.position.x < 0)
+                {
+                    Destroy(copy1);
+                    copy1 = copy2;
+                    copy2 = Instantiate(conveyor, new Vector3(conveyor.transform.localScale.x, conveyor.transform.position.y, conveyor.transform.position.z), Quaternion.identity);
+                }
             }
         }
     }

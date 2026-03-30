@@ -18,6 +18,7 @@ public class MugSpawner : MonoBehaviour
     public SpriteRenderer painter;
     public ParticleSystem particles;
     
+    public static bool isPaused = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,16 +35,18 @@ public class MugSpawner : MonoBehaviour
                 break;
             case GameState.PLAY:
                 {
-                    //Instantiate a new mug if the last spawned mug passes a distance threshold (or if there are no mugs)
-                    if (mugs.Count == 0 || mugs[mugs.Count - 1].transform.position.x + distanceBetweenMugs < startingX)
-                        mugs.Add(Instantiate(mug, new Vector3(startingX, 0, 0), Quaternion.identity));
-                    //If the mug passed a meter beyond the edge of the screen destroy it
-                    if (mugs.Count != 0 && mugs[0].transform.position.x < Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1)
+                    if (!isPaused)
                     {
-                        Destroy(mugs[0]);
-                        mugs.RemoveAt(0);
-                    }
-                        
+                        //Instantiate a new mug if the last spawned mug passes a distance threshold (or if there are no mugs)
+                        if (mugs.Count == 0 || mugs[mugs.Count - 1].transform.position.x + distanceBetweenMugs < startingX)
+                            mugs.Add(Instantiate(mug, new Vector3(startingX, 0, 0), Quaternion.identity));
+                        //If the mug passed a meter beyond the edge of the screen destroy it
+                        if (mugs.Count != 0 && mugs[0].transform.position.x < Camera.main.ScreenToWorldPoint(Vector3.zero).x - 1)
+                        {
+                            Destroy(mugs[0]);
+                            mugs.RemoveAt(0);
+                        }
+                    }   
                 }
                 break;
             case GameState.END:

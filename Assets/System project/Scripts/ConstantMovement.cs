@@ -8,7 +8,7 @@ public class ConstantMovement : MonoBehaviour
 
     //I can't remember if we are allowed to use static but I figured that since I will need all elements moving to stop at the same time I
     //figured that having a variable outside of the specific class instance that all instanses use would be easier than stopping them one by one.
-    public static bool isStopped = false;
+    public static bool isPaused = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +19,7 @@ public class ConstantMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isStopped)
+        if (!isPaused)
         {
             switch (direction)
             {
