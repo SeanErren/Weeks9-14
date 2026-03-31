@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -8,6 +9,8 @@ public class TilemapStuff : MonoBehaviour
     public Transform cheese;
 
     public Tile flowers;
+
+    public CinemachineImpulseSource impulseSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,6 +33,7 @@ public class TilemapStuff : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             tilemap.SetTile(highlightedCell, flowers);
+            impulseSource.GenerateImpulse();
         }
     }
 }
