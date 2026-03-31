@@ -72,5 +72,6 @@ public class PauseConveyor : MonoBehaviour
     {
         hasStopped = false;
         hasGameEnded = false;
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

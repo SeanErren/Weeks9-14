@@ -51,7 +51,7 @@ public class MugSpawner : MonoBehaviour
                         //Instantiate a new mug if the last spawned mug passes a distance threshold (or if there are no mugs)
                         if (mugs.Count == 0 || mugs[mugs.Count - 1].transform.position.x + distanceBetweenMugs < startingX)
                         {
-                            mugs.Add(Instantiate(mug, new Vector3(startingX, 0, 0), Quaternion.identity));
+                            mugs.Add(Instantiate(mug, new Vector3(startingX, -0.25f, 0), Quaternion.identity));
                             int tempRandom = Random.Range(0, 3); //Get a random integer (0 - 2)
                             switch(tempRandom) //Based on the number give the desired color a corrosponding painter
                             {
@@ -144,7 +144,7 @@ public class MugSpawner : MonoBehaviour
             if (crusherHitbox.bounds.Contains(mugs[i].transform.position))
             {
                 mugs[i].transform.localScale -= new Vector3(0, 0.5f, 0);
-                mugs[i].transform.position -= new Vector3(0, 0.25f, 0);
+                mugs[i].transform.position -= new Vector3(0, 0.1f, 0);
             }
         }
     }
