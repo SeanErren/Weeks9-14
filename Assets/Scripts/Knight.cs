@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Knight : MonoBehaviour
 {
     public AudioSource footsetpSound;
     public List<AudioClip> audioClips;
+
+    public CinemachineImpulseSource shake;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,5 +28,6 @@ public class Knight : MonoBehaviour
 
         //SAVE PROJECT INSTEAD OF SAVE SCENE WILL MAKE SURE THAT THE ANIMATION LAYOUT WILL BE SAVED (should be saved anyway but just in case
         footsetpSound.Play();
+        shake.GenerateImpulse();
     }
 }
